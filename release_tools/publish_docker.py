@@ -104,6 +104,8 @@ def build_and_push_image(dest_dir, image_name, tag):
     print(f"Pushed {image_name}:{tag}")
     digest = get_image_digest(image_name, tag)
     print(f"Image digest: {digest}")
+    with open("/tmp/digest.txt", "w") as f:
+        f.write(digest)
 
 if __name__ == "__main__":
     if len(sys.argv) != 5:
