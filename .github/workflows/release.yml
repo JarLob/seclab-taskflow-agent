@@ -17,7 +17,7 @@ permissions:
 env:
   REGISTRY: ghcr.io
   USER: jarlob
-  IMAGE_NAME: seclab-taskflow-agent
+  IMAGE_NAME: seclab-taskflow-agent3
 
 jobs:
   release:
