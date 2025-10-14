@@ -34,7 +34,8 @@ jobs:
       - name: Create release
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u GitHubSecurityLab --password-stdin
-          python release_tools/publish_docker.py release.txt main.py ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.IMAGE_NAME }} ${{ github.event.inputs.release_tag }}
+          DIGEST=$(python release_tools/publish_docker.py release.txt main.py ${{ env.REGISTRY }}/${{ env.USER }}/${{ env.IMAGE_NAME }} ${{ github.event.inputs.release_tag }}) | grep '^Image digest: ' | cut -d'=' -f2)
+          echo "digest=$DIGEST" >> $GITHUB_OUTPUT
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v3
